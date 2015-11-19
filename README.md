@@ -17,4 +17,3 @@ It's not pretty, but it works, and the entire process takes approximately half a
 * Optimize for faster running
 * Pull out player IDs and write them to a file (to be used with @pricetx's script)
 * Additional data as requested
-* Create web generator for this?
