@@ -1,5 +1,11 @@
-pastData <- read.csv("October.csv", colClasses=c(NA, "NULL", NA, "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL"))
-currentData <- read.csv("November.csv", colClasses=c(NA, "NULL", NA, "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL"))
+#Set these variables to the files you want to read
+pastCsv <- "October.csv"
+currentCsv <- "November.csv"
+outputFile <- "ServerMoves.csv"
+# End of user variables; once these are filled out, you can run the script
+
+pastData <- read.csv(pastCsv, colClasses=c(NA, "NULL", NA, "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL"))
+currentData <- read.csv(currentCsv, colClasses=c(NA, "NULL", NA, "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL", "NULL"))
 
 #Change Column Name for the current data's "realm" to "realmNow" for merging
 colnames(currentData)[2] <- "realmNow"
@@ -9,7 +15,7 @@ mergeSet <- merge(pastData, currentData, by = "id")
 
 serverMoveTable <- table(mergeSet[c(2,3)])
 
-#removes the population still on the server from the table
+#removes the population still on the server from the table, using 0 so addmargins doesn't freak out
 for(i in 1:64){
   serverMoveTable[i, i] <- 0
 }
@@ -22,4 +28,4 @@ for(i in 1:64){
 }
 
 #Write serverMoveTable to .csv
-write.csv(serverMoveTable, file="ServerMoves.csv")
+write.csv(serverMoveTable, file=outputFile)
