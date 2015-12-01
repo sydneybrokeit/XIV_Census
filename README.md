@@ -21,4 +21,4 @@ ServerMoves.R
 * Optimize for faster running
 * Pull out player IDs and write them to a file (to be used with @pricetx's script)
 * Additional data as requested
-* Create representation of server changes
+* Create representation of server changes (DONE)
