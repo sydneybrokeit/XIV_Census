@@ -15,9 +15,13 @@ mergeSet <- merge(pastData, currentData, by = "id")
 
 serverMoveTable <- table(mergeSet[c(2,3)])
 
+proportionalSMTable <- prop.table(serverMoveTable, 1)
+
+
 #removes the population still on the server from the table, using 0 so addmargins doesn't freak out
 for(i in 1:64){
   serverMoveTable[i, i] <- 0
+  proportionalSMTable[i, i] <- 0
 }
 
 serverMoveTable <- addmargins(serverMoveTable)
@@ -25,7 +29,9 @@ serverMoveTable <- addmargins(serverMoveTable)
 #removes the population still on the server from the table
 for(i in 1:64){
   serverMoveTable[i, i] <- NA
+  proportionalSMTable[i, i] <- NA
 }
 
 #Write serverMoveTable to .csv
 write.csv(serverMoveTable, file=outputFile)
+write.csv(proportionalSMTable, file="proportional.csv")

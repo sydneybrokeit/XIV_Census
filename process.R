@@ -2,7 +2,7 @@ require(ggplot2); #for drawing
 require(scales); #for adjusting scales in charts
 
 #Set Filename Here
-playerSetName <- "PlayersTotal.csv";
+playerSetName <- "November.csv";
 levelBreaks <- (0:12 * 5);
 levelBreaks_small <- (0:6*10);
 
@@ -87,6 +87,9 @@ generateCharts(playerData_50, "lv50", "(50+)");
 
 playerData_60 <- subByLevel(playerData_50, 60);
 generateCharts(playerData_60, "lv60", "(60+)");
+
+#To allow importing level 60 data into other processes
+save(playerData_60, file="playerData_60.rdata")
 
 dir.create("lv60/crossclass");
 
