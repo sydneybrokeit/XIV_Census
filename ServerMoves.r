@@ -14,6 +14,7 @@ colnames(currentData)[2] <- "realmNow"
 mergeSet <- merge(pastData, currentData, by = "id")
 
 serverMoveTable <- table(mergeSet[c(2,3)])
+netTable <- serverMoveTable - t(serverMoveTable)
 
 proportionalSMTable <- prop.table(serverMoveTable, 1)
 
@@ -30,8 +31,10 @@ serverMoveTable <- addmargins(serverMoveTable)
 for(i in 1:64){
   serverMoveTable[i, i] <- NA
   proportionalSMTable[i, i] <- NA
+  netTable[i,i] <- NA
 }
 
 #Write serverMoveTable to .csv
 write.csv(serverMoveTable, file=outputFile)
 write.csv(proportionalSMTable, file="proportional.csv")
+write.csv(netTable, "netTable.csv")
