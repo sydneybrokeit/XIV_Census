@@ -59,12 +59,15 @@ generateCharts <- function(pDataSet, location, appendText) {
    print(ggplot(pDataSubset, aes_string(x=i)) + geom_histogram(binwidth = 1, origin=0.5) + scale_x_continuous(breaks=levelBreaks_small, name=paste(pcName, appendText)) + facet_wrap(~realm) + theme(axis.text.x=element_text(angle=-90, vjust=0.5)) );
     ggsave(saveLocation, height=11, width=11, units="in");
   }
+  
+  dir.create(paste(location, "/demographics/", sep=""));
+  
   #Generates Grand Company charts
   grandCompanies <- subset(pDataSet[4], grand_company != "");
   ggplot(grandCompanies, aes(x=grand_company)) + geom_bar(stat="bin") + scale_x_discrete(name=paste("Grand Company", appendText)) + stat_bin(geom = "text", aes(label = paste((..count..)), vjust = 5));
-  ggsave(paste(location, "/GC.png", sep=""));
+  ggsave(paste(location, "demographics/GC.png", sep=""));
   
-  dir.create(paste(location, "/demographics/", sep=""));
+
   #Creates Ranked charts for demographics
   popCount <- table(pDataSet[1]);
   serverRanking <- order(popCount, decreasing = TRUE);
