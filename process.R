@@ -65,7 +65,7 @@ generateCharts <- function(pDataSet, location, appendText) {
   #Generates Grand Company charts
   grandCompanies <- subset(pDataSet[4], grand_company != "");
   ggplot(grandCompanies, aes(x=grand_company)) + geom_bar(stat="bin") + scale_x_discrete(name=paste("Grand Company", appendText)) + stat_bin(geom = "text", aes(label = paste((..count..)), vjust = 5));
-  ggsave(paste(location, "demographics/GC.png", sep=""));
+  ggsave(paste(location, "/demographics/GC.png", sep=""));
   
 
   #Creates Ranked charts for demographics
